@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdio.h>
+#include <string.h>
 using namespace std;
  static const unsigned char  s_box[256] = {
     //0     1    2      3     4    5     6     7      8    9     A      B    C     D     E     F
@@ -122,17 +123,20 @@ while(bytesGenerated < 176)
    //Read 4 bytes for the core :
    for(int i=0 ; i< 4 ; i++)
         temp[i] = expandedKey[i+ bytesGenerated -4 ];
-    }
+    
     if(bytesGenerated %16 ==0 )
     {
         KeyExpantionCore(temp, rconIteration);
         rconIteration++;
     }
+
 //Xor temp with generated -16 and store in expanded Keys
     for(unsigned char a = 0; a < 4; a++) {
         expandedKey[bytesGenerated] = expandedKey[bytesGenerated - 16] ^ temp[a];
         bytesGenerated++;
     }
+
+}
 }
 
 
@@ -226,24 +230,41 @@ void AES_Encrypt(unsigned char* message,unsigned char* key)
         AddRoundKey(state,expandedKey + 160);
 //every 16 byte new Round key
     
+for(int i=0;i<16;i++)
+ {
+    printf("%p ",state[i]);
+  }
 
-printf("\n%s\n",state);
 }
    
 int main()
 {
-   unsigned   char message[]="This is message";
+   unsigned   char message[10];
+    cin>>message;
    unsigned  char key[] = {
         1, 2, 3, 4,
         5, 6, 7, 8,
         9, 10, 11, 12,
         13, 14, 15, 16,    
         };
+int originalLen=strlen((char*)message);
+int lenOfPadded =originalLen;
+ 
+if(lenOfPadded %16 !=0)
+        lenOfPadded = ( lenOfPadded / 16 +1)*16;
+printf("%d %d",originalLen,lenOfPadded);
+unsigned char* paddedMessage = new unsigned char[lenOfPadded];
+for(int i=0;i < lenOfPadded ;i++)
+{
+    if(i>=originalLen)  
+        paddedMessage[i]=0;
+    else
+        paddedMessage[i]=message[i];
+}
 
-printf("\n%s\n",message);
-AES_Encrypt(message,key);
-   
-    
+printf("\n%s\n",paddedMessage);
+for(int i=0;i<lenOfPadded;i+=16)
+    AES_Encrypt(paddedMessage,key);
 return 0;
     
 }
