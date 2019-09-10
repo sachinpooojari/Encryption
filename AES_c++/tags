@@ -4,12 +4,9 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-AES_Encrypt	encrypt.cpp	/^void AES_Encrypt(unsigned char* message,unsigned char* key)$/;"	f
-AddRoundKey	encrypt.cpp	/^void AddRoundKey(unsigned char* state,unsigned char* roundKey){ } $/;"	f
-InitialRound	encrypt.cpp	/^void InitialRound()$/;"	f
-KeyExpantion	encrypt.cpp	/^void KeyExpantion()$/;"	f
-MixCollums	encrypt.cpp	/^void  MixCollums(){ }$/;"	f
-ShiftRows	encrypt.cpp	/^void ShiftRows(unsigned char* state){}$/;"	f
-SubBytes	encrypt.cpp	/^void SubBytes(unsigned char* state){$/;"	f
-main	encrypt.cpp	/^int main()$/;"	f
+KeyExpantion	encrypt.cpp	/^void KeyExpantion(unsigned char* inputKey,unsigned char *expandedKey)$/;"	f
+KeyExpantionCore	encrypt.cpp	/^void KeyExpantionCore(unsigned char *in,unsigned char i)$/;"	f
+mul2	encrypt.cpp	/^unsigned char mul2[]={$/;"	v
+mul3	encrypt.cpp	/^unsigned char mul3[]={$/;"	v
+rcon	encrypt.cpp	/^unsigned char rcon[256] = {$/;"	v
 s_box	encrypt.cpp	/^ static const unsigned char  s_box[256] = {$/;"	v	file:
